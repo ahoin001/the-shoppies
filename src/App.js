@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ChakraProvider,
   Box,
@@ -12,29 +12,28 @@ import {
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
 
+import List from './components/movie-list/List';
+
 function App() {
+  const [appState, setAppState] = useState({
+    loading: false,
+    movies: null,
+  });
+
+  useEffect(() => {
+    const apiUrl = 'http://www.omdbapi.com/?s=batman&apikey=3efca87a';
+
+    fetch(apiUrl)
+      .then(res => res.json())
+      .then(movies => {
+        setAppState({ loading: false, movies: movies.Search });
+      });
+  }, [setAppState]);
+
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
+      <Box textAlign="center" fontSize="xl"></Box>
+      <List movies={appState.movies} />
     </ChakraProvider>
   );
 }
