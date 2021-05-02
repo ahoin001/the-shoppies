@@ -1,27 +1,23 @@
 import React from 'react';
-import { Box } from "@chakra-ui/react"
+import { useRecoilValue } from 'recoil';
+import { movieListState } from '../../atoms/atoms';
+import { Box, Heading } from '@chakra-ui/react';
+import Movie from '../movie/movie';
 
 const List = props => {
-  console.log(props);
-  const { movies } = props;
-  console.log('*****', movies);
-
+  const movies = useRecoilValue(movieListState);
+  console.log('=================', movies);
+  //  TODO COME BACK AND ADD LOADING SCREEN
   if (!movies || movies.length === 0) return <p>Search for some movies!</p>;
 
   return (
     <ul>
-      <h2>Movies</h2>
+      <Heading bg="lightblue">Movies</Heading>
+
       {movies.map(movie => {
         return (
-
-          <Box boxShadow="xl" p="6"m="4">
-            <li key={movie.imdbID} className="list">
-              <span>{movie.Title}</span>
-              <span>{movie.Year}</span>
-            </li>
-          </Box>
-       
-       );
+            <li key={movie.imdbID}><Movie movie={movie} /></li>
+        );
       })}
     </ul>
   );
