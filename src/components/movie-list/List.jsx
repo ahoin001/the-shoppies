@@ -27,7 +27,6 @@ const List = props => {
 
   return (
     <Box bg="lightcyan" maxW="lg">
-
       <UnorderedList styleType="none">
         <Heading bg="lightblue">Movies</Heading>
 
@@ -35,15 +34,22 @@ const List = props => {
           return (
             <Box key={movie.imdbID} w="100%">
               <ListItem>
-                <Movie movie={movie} />
+                
+                {/* Check if the movie is already in nominatedList */}
+                {nominations.some(movieToCheckForNomination => {
+                  return movieToCheckForNomination.imdbID === movie.imdbID;
+                }) ? (
+                  <Movie isNominatedAlready movie={movie} />
+                ) : (
+                  <Movie isNominee movie={movie} />
+                )}
+                {/* <Movie movie={movie} /> */}
               </ListItem>
-              {/* <Button></Button> */}
             </Box>
           );
         })}
       </UnorderedList>
     </Box>
-    
   );
 };
 export default List;
