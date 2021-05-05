@@ -4,7 +4,7 @@ import { nominationListState } from '../../atoms/atoms';
 import { Box, Heading, ListItem, UnorderedList } from '@chakra-ui/react';
 import Movie from '../movie/movie';
 
-const NominaionList = props => {
+const NominaionList = ({ isNominatedList }) => {
   const nominations = useRecoilValue(nominationListState);
   console.log('=================', nominations);
   //  TODO COME BACK AND ADD LOADING SCREEN

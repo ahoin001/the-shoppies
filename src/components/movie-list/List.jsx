@@ -3,13 +3,9 @@ import { useRecoilValue } from 'recoil';
 import { movieListState, nominationListState } from '../../atoms/atoms';
 import {
   Box,
-  Button,
   Heading,
-  HStack,
-  VStack,
   ListItem,
-  ListIcon,
-  OrderedList,
+
   UnorderedList,
 } from '@chakra-ui/react';
 import Movie from '../movie/movie';

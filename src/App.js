@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import { RecoilRoot } from 'recoil';
 
-import { ChakraProvider, Box, Heading, theme,Flex, Spacer } from '@chakra-ui/react';
+import {
+  ChakraProvider,
+  Box,
+  Heading,
+  theme,
+  Flex,
+} from '@chakra-ui/react';
+
+import StyledCard from './components/movie/styledcard'
 // import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
 
 import MovieSearchBar from './components/searchbar/movie-searchbar';
 import List from './components/movie-list/List';
@@ -14,20 +21,11 @@ function App() {
     loading: false,
     movies: null,
   });
-  // useEffect(() => {
-  //   const apiUrl = 'http://www.omdbapi.com/?s=batman&apikey=3efca87a';
-
-  //   fetch(apiUrl)
-  //     .then(res => res.json())
-  //     .then(movies => {
-  //       console.log(movies)
-  //       setAppState({ loading: false, movies: movies.Search });
-  //     });
-  // }, [setAppState]);
 
   return (
     <ChakraProvider theme={theme}>
       <RecoilRoot>
+
         <Heading>The Shoppies</Heading>
         <Box>
           <MovieSearchBar />
@@ -35,8 +33,6 @@ function App() {
             <List />
             <NominaionList />
           </Flex>
-            
-          {/* </HStack> */}
         </Box>
       </RecoilRoot>
     </ChakraProvider>

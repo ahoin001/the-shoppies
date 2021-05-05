@@ -1,7 +1,7 @@
 import { Box, Heading } from '@chakra-ui/layout';
 import { useRecoilState } from 'recoil';
 import { nominationListState } from '../../atoms/atoms';
-import { Button } from '@chakra-ui/react';
+import { Button,Image } from '@chakra-ui/react';
 import React from 'react';
 
 export default function Movie({
@@ -20,6 +20,7 @@ export default function Movie({
       Title: movie.Title,
       Year: movie.Year,
       imdbID: movie.imdbID,
+      Poster:movie.Poster,
     };
 
     // ? Must update array in state by copying and updating previous array not with .push
@@ -51,6 +52,12 @@ export default function Movie({
     <Box p="6" m="4" boxShadow="xl">
       <Heading size="lg">{movie.Title}</Heading>
       <Heading size="md">{movie.Year}</Heading>
+      <Image
+        boxSize="150px"
+        objectFit="cover"
+        src={movie.Poster}
+        alt="Dan Abramov"
+      />
 
       {isNominee ? <Button onClick={nominateMovie}>Nominate</Button> : ''}
       {isNominatedAlready ? <Button isDisabled>Nominate</Button> : ''}
