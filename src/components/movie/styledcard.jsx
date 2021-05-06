@@ -104,7 +104,6 @@ export default function StyledCard() {
         backgroundRepeat= "no-repeat"
         borderRadius="11px"
         width="80%"
-        // backgroundImage="url('https://occ-0-2433-448.1.nflxso.net/art/cd5c9/3e192edf2027c536e25bb5d3b6ac93ced77cd5c9.jpg')"
         backgroundImage="url('https://movieplayer.net-cdn.it/t/images/2017/12/20/bright_jpg_191x283_crop_q85.jpg')"
       ></Box>
     </Box>

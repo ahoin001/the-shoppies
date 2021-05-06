@@ -1,7 +1,7 @@
 import { Box, Heading } from '@chakra-ui/layout';
 import { useRecoilState } from 'recoil';
 import { nominationListState } from '../../atoms/atoms';
-import { Button,Image } from '@chakra-ui/react';
+import { Button, Image, useToast } from '@chakra-ui/react';
 import React from 'react';
 
 export default function Movie({
@@ -14,14 +14,28 @@ export default function Movie({
     nominationListState
   );
 
+  const toast = useToast();
+
   const nominateMovie = () => {
     // Create movie object from movie data to push to list(array)
     const nominatedTheMovie = {
       Title: movie.Title,
       Year: movie.Year,
       imdbID: movie.imdbID,
-      Poster:movie.Poster,
+      Poster: movie.Poster,
     };
+
+    console.log("-----------------",nominationList.length)
+    if (nominationList.length >= 2) {
+      return toast({
+        position: 'top',
+        render: () => (
+          <Box color="white" p={3} bg="yellow.500">
+            You can only nominate 5 movies, remove a movie from nominations list to add a different movie
+          </Box>
+        ),
+      });
+    }
 
     // ? Must update array in state by copying and updating previous array not with .push
     setNominationList(oldList => [...oldList, nominatedTheMovie]);
