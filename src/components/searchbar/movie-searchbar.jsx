@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { movieListState } from '../../atoms/atoms';
+import { useSetRecoilState, useRecoilState } from 'recoil';
+import {
+  movieListState,
+  isLoadingState,
+} from '../../atoms/atoms';
 
 import { Box, Heading } from '@chakra-ui/react';
 import { Input, Button } from '@chakra-ui/react';
@@ -10,38 +13,42 @@ import debounce from 'lodash.debounce';
 
 const MovieSearchBar = () => {
   const setMovieList = useSetRecoilState(movieListState);
+  const [isLoading, setIsLoading] = useRecoilState(isLoadingState);
 
-  const [searchState, setSearchState] = useState({
-    searchTitle: '',
-    loading: false,
-  });
+  const [searchState, setSearchState] = useState('');
 
   const handleInputChange = e => {
-    setSearchState({ searchTitle: e.target.value });
+    console.log('States BEFORE are ' + searchState + ' and ' + isLoading);
+    setSearchState(e.target.value);
+    setIsLoading(true);
+    console.log('States AFTER are ' + searchState + ' and ' + isLoading);
   };
 
   const fetchMovies = async movieTitle => {
+    console.log('Called fetch loading is : ', isLoading);
     let apiUrl = `http://www.omdbapi.com/?s=${movieTitle}&type=movie&apikey=3efca87a`;
-
-    try {
-      await fetch(apiUrl)
-        .then(res => res.json())
-        .then(movies => {
-          console.log('FROM fetch: ', movies);
-          setMovieList(movies.Search);
-        });
-    } catch (error) {
-      console.log(error);
+    if (isLoading) {
+      try {
+        await fetch(apiUrl)
+          .then(res => res.json())
+          .then(movies => {
+            console.log('FROM fetch: ', movies);
+            setMovieList(movies.Search);
+            setIsLoading(false);
+          });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   const debouncedFetch = useCallback(debounce(fetchMovies, 380), []);
 
   useEffect(() => {
-    if (searchState.searchTitle.length > 0) {
-      debouncedFetch(searchState.searchTitle.trim());
+    if (searchState.length > 0) {
+      debouncedFetch(searchState.trim());
     }
-  }, [searchState.searchTitle]);
+  }, [searchState, isLoading]);
 
   return (
     <Box>
@@ -49,9 +56,8 @@ const MovieSearchBar = () => {
       <Input
         type="text"
         placeholder="Search Movies"
-        value={searchState.searchTitle || ''}
+        value={searchState || ''}
         onChange={handleInputChange}
-        // onChange={debounceOnChange}
       />
     </Box>
   );

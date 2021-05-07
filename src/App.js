@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
 import { RecoilRoot } from 'recoil';
 
-import {
-  ChakraProvider,
-  Box,
-  Heading,
-  theme,
-  Flex,
-} from '@chakra-ui/react';
+import { ChakraProvider, Box, Heading, theme, Flex } from '@chakra-ui/react';
 
-import StyledCard from './components/movie/styledcard'
+import MovieCard from './components/movie/movie-card';
 // import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 import MovieSearchBar from './components/searchbar/movie-searchbar';
@@ -25,7 +19,6 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <RecoilRoot>
-
         <Heading>The Shoppies</Heading>
         <Box>
           <MovieSearchBar />

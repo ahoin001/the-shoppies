@@ -1,19 +1,22 @@
 import React from 'react';
-import { Box, Heading } from '@chakra-ui/layout';
-import { useRecoilState } from 'recoil';
-import { nominationListState } from '../../atoms/atoms';
 import {
-  Button,
+  Flex,
+  Box,
   Image,
   useToast,
+  Button,
+  useColorModeValue,
+  Heading,
 } from '@chakra-ui/react';
+import { useRecoilState } from 'recoil';
+import { nominationListState } from '../../atoms/atoms';
 
-export default function Movie({
+const MovieCard = ({
   movie,
   removableNominee,
   isNominatedAlready,
   isNominee,
-}) {
+}) => {
   const [nominationList, setNominationList] = useRecoilState(
     nominationListState
   );
@@ -69,23 +72,62 @@ export default function Movie({
   };
 
   return (
-    <Box p="6" m="4" boxShadow="xl">
-      <Heading size="lg">{movie.Title}</Heading>
-      <Heading size="md">{movie.Year}</Heading>
-      <Image
-        boxSize="150px"
-        objectFit="cover"
-        src={movie.Poster}
-        alt="Dan Abramov"
-      />
+    <Flex p={10} w="full" alignItems="center" justifyContent="center">
+      <Box
+        bg={useColorModeValue('white', 'gray.800')}
+        minW="300px"
+        minH="200px"
+        // maxW="sm"
+        borderWidth="1px"
+        rounded="lg"
+        shadow="lg"
+        position="relative"
+      >
+        <Image
+          src={movie.Poster}
+          w="full"
+          h="280px"
+          alt={`Picture of ${movie.name}`}
+          roundedTop="lg"
+        />
 
-      {isNominee ? <Button onClick={nominateMovie}>Nominate</Button> : ''}
-      {isNominatedAlready ? <Button isDisabled>Nominate</Button> : ''}
-      {removableNominee ? (
-        <Button onClick={removeNominatedMovie}>Remove</Button>
-      ) : (
-        ''
-      )}
-    </Box>
+        <Box p="6">
+          <Flex
+            mt="1"
+            h="120px"
+            direction="column"
+            justifyContent="space-evenly"
+            alignItems="center"
+          >
+            <Heading
+              fontSize="2xl"
+              fontWeight="semibold"
+              lineHeight="tight"
+              isTruncated
+            >
+              {movie.Title}
+            </Heading>
+            <Heading
+              fontSize="2xl"
+              fontWeight="semibold"
+              lineHeight="tight"
+              isTruncated
+            >
+              {`(${movie.Year})`}
+            </Heading>
+            
+            {isNominee ? <Button onClick={nominateMovie}>Nominate</Button> : ''}
+            {isNominatedAlready ? <Button isDisabled>Nominate</Button> : ''}
+            {removableNominee ? (
+              <Button onClick={removeNominatedMovie}>Remove</Button>
+            ) : (
+              ''
+            )}
+          </Flex>
+        </Box>
+      </Box>
+    </Flex>
   );
-}
+};
+
+export default MovieCard;
