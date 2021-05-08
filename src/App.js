@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { RecoilRoot } from 'recoil';
 
-import { ChakraProvider, Box, Heading, theme, Flex } from '@chakra-ui/react';
+import { ChakraProvider, Box, Heading, theme, Flex, Center } from '@chakra-ui/react';
 
 import MovieCard from './components/movie/movie-card';
 // import { ColorModeSwitcher } from './ColorModeSwitcher';
@@ -19,12 +19,18 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <RecoilRoot>
-        <Heading>The Shoppies</Heading>
-        <Box>
+        <Box py={90} px={300} bg="#f3f6f8" >
+          <Heading>The Shoppies</Heading>
+
           <MovieSearchBar />
+
           <Flex justifyContent="space-between">
-            <List />
-            <NominaionList />
+            <Box bg="white" minW="500px" maxW="lg" p={8}>
+              <List />
+            </Box>
+            <Box bg="white" minW="500px" maxW="lg" p={8}>
+              <NominaionList />
+            </Box>
           </Flex>
         </Box>
       </RecoilRoot>

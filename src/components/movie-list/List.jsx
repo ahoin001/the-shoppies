@@ -12,7 +12,7 @@ import {
   UnorderedList,
   Spinner,
 } from '@chakra-ui/react';
-import Movie from '../movie/movie';
+
 import MovieCard from '../movie/movie-card';
 
 const List = props => {
@@ -28,30 +28,27 @@ const List = props => {
   if (isLoading) return <Spinner />;
 
   return (
-    <Box bg="lightcyan" maxW="lg">
-      <UnorderedList styleType="none">
-        <Heading bg="lightblue">Movies</Heading>
-
-        {movies.map(movie => {
-          return (
-            <Box key={movie.imdbID} w="100%">
-              <ListItem>
-                {/* Check if the movie is already in nominatedList */}
-                {nominations.some(movieToCheckForNomination => {
-                  return movieToCheckForNomination.imdbID === movie.imdbID;
-                }) ? (
-                  // <Movie isNominatedAlready movie={movie} />
-                  <MovieCard isNominatedAlready movie={movie} />
-                ) : (
-                  // <Movie isNominee movie={movie} />
-                  <MovieCard isNominee movie={movie} />
-                )}
-              </ListItem>
-            </Box>
-          );
-        })}
-      </UnorderedList>
-    </Box>
+    <UnorderedList styleType="none">
+      <Heading size="md">Results for </Heading>
+      {movies.map(movie => {
+        return (
+          <Box key={movie.imdbID} w="100%">
+            <ListItem>
+              {/* Check if the movie is already in nominatedList */}
+              {nominations.some(movieToCheckForNomination => {
+                return movieToCheckForNomination.imdbID === movie.imdbID;
+              }) ? (
+                // <Movie isNominatedAlready movie={movie} />
+                <MovieCard isNominatedAlready movie={movie} />
+              ) : (
+                // <Movie isNominee movie={movie} />
+                <MovieCard isNominee movie={movie} />
+              )}
+            </ListItem>
+          </Box>
+        );
+      })}
+    </UnorderedList>
   );
 };
 export default List;

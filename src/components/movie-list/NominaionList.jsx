@@ -12,20 +12,17 @@ const NominaionList = ({ isNominatedList }) => {
   if (!nominations || nominations.length === 0) return <p>Nominate a Movie!</p>;
 
   return (
-    <Box bg="lightcyan" maxW="lg">
-      <UnorderedList styleType="none">
-        <Heading bg="lightblue">Nominations</Heading>
-
-        {nominations.map(movie => {
-          return (
-            <ListItem key={movie.imdbID}>
-              {/* FOr now use NominatedList prop to format Movie component for nomination list */}
-              <MovieCard removableNominee movie={movie} />
-            </ListItem>
-          );
-        })}
-      </UnorderedList>
-    </Box>
+    <UnorderedList styleType="none">
+      <Heading size="md">Nominations</Heading>
+      {nominations.map(movie => {
+        return (
+          <ListItem key={movie.imdbID}>
+            {/* FOr now use NominatedList prop to format Movie component for nomination list */}
+            <MovieCard removableNominee movie={movie} />
+          </ListItem>
+        );
+      })}
+    </UnorderedList>
   );
 };
 export default NominaionList;

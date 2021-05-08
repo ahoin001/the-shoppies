@@ -75,9 +75,9 @@ const MovieCard = ({
     <Flex p={10} w="full" alignItems="center" justifyContent="center">
       <Box
         bg={useColorModeValue('white', 'gray.800')}
-        minW="300px"
+        minw="350px"
         minH="200px"
-        // maxW="sm"
+        maxW="sm"
         borderWidth="1px"
         rounded="lg"
         shadow="lg"
@@ -86,12 +86,12 @@ const MovieCard = ({
         <Image
           src={movie.Poster}
           w="full"
-          h="280px"
+          h="300px"
           alt={`Picture of ${movie.name}`}
           roundedTop="lg"
         />
 
-        <Box p="6">
+        <Box p="3">
           <Flex
             mt="1"
             h="120px"
@@ -103,6 +103,7 @@ const MovieCard = ({
               fontSize="2xl"
               fontWeight="semibold"
               lineHeight="tight"
+              wordBreak="break-word"
               isTruncated
             >
               {movie.Title}
@@ -115,7 +116,7 @@ const MovieCard = ({
             >
               {`(${movie.Year})`}
             </Heading>
-            
+
             {isNominee ? <Button onClick={nominateMovie}>Nominate</Button> : ''}
             {isNominatedAlready ? <Button isDisabled>Nominate</Button> : ''}
             {removableNominee ? (

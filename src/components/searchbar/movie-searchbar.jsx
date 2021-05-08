@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
-import {
-  movieListState,
-  isLoadingState,
-} from '../../atoms/atoms';
+import { movieListState, isLoadingState } from '../../atoms/atoms';
 
-import { Box, Heading } from '@chakra-ui/react';
-import { Input, Button } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  Input,
+  Button,
+  InputGroup,
+  InputLeftElement,
+} from '@chakra-ui/react';
+import { SearchIcon } from '@chakra-ui/icons';
 
 // Might replace with custom debounce for practice but this works
 import debounce from 'lodash.debounce';
@@ -51,14 +55,17 @@ const MovieSearchBar = () => {
   }, [searchState, isLoading]);
 
   return (
-    <Box>
-      <Heading>Movie Title</Heading>
-      <Input
-        type="text"
-        placeholder="Search Movies"
-        value={searchState || ''}
-        onChange={handleInputChange}
-      />
+    <Box bg="white" my={7} px={7} py={6}>
+      <Heading size="md">Movie Title</Heading>
+      <InputGroup mt={4}>
+        <InputLeftElement pointerEvents="none" children={<SearchIcon />} />
+        <Input
+          type="text"
+          placeholder="Search Movies"
+          value={searchState || ''}
+          onChange={handleInputChange}
+        />
+      </InputGroup>
     </Box>
   );
 };
