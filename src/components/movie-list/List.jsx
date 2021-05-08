@@ -20,8 +20,8 @@ const List = props => {
   let nominations = useRecoilValue(nominationListState);
   const isLoading = useRecoilValue(isLoadingState);
 
-  console.log('========nominations=========', nominations);
-  console.log('========movies=========', movies);
+  // console.log('========nominations=========', nominations);
+  // console.log('========movies=========', movies);
 
   if (!movies || movies.length === 0)
     return <p>Type in eligible movie title!</p>;

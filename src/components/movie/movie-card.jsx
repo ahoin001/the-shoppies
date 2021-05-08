@@ -7,6 +7,7 @@ import {
   Button,
   useColorModeValue,
   Heading,
+  Container,
 } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import { nominationListState } from '../../atoms/atoms';
@@ -36,6 +37,8 @@ const MovieCard = ({
     if (nominationList.length > 4) {
       return toast({
         position: 'top',
+        duration: 2900,
+        isClosable: true,
 
         render: () => (
           <Box color="white" p={5} bg="yellow.400" borderRadius="lg">
@@ -48,6 +51,10 @@ const MovieCard = ({
 
     // ? Must update array in state by copying and updating previous array not with .push
     setNominationList(oldList => [...oldList, nominatedTheMovie]);
+    localStorage.setItem(
+      'savedNominations',
+      JSON.stringify([...nominationList, nominatedTheMovie])
+    );
 
     console.log('WOW OUR WINNERS!!', nominationList);
   };
@@ -68,16 +75,17 @@ const MovieCard = ({
     // ? Update array in state with updated copy
     // TODO
     // ! Might just use filter on array since this is small project/list and no worry of being slow
+    localStorage.setItem('savedNominations', JSON.stringify(copyOfArrayState));
     setNominationList(copyOfArrayState);
   };
 
   return (
     <Flex p={10} w="full" alignItems="center" justifyContent="center">
       <Box
-        bg={useColorModeValue('white', 'gray.800')}
-        minw="350px"
+        // bg={useColorModeValue('white', 'gray.800')}
+        minw="250px"
         minH="200px"
-        maxW="sm"
+        maxW="300px"
         borderWidth="1px"
         rounded="lg"
         shadow="lg"
@@ -91,29 +99,24 @@ const MovieCard = ({
           roundedTop="lg"
         />
 
-        <Box p="3">
+        <Box p="3" h="180px">
           <Flex
             mt="1"
-            h="120px"
+            // maxW="400px"
+            h="full"
             direction="column"
             justifyContent="space-evenly"
             alignItems="center"
           >
             <Heading
-              fontSize="2xl"
+              textAlign="center"
+              fontSize="xl"
               fontWeight="semibold"
               lineHeight="tight"
-              wordBreak="break-word"
-              isTruncated
             >
               {movie.Title}
             </Heading>
-            <Heading
-              fontSize="2xl"
-              fontWeight="semibold"
-              lineHeight="tight"
-              isTruncated
-            >
+            <Heading fontSize="xl" fontWeight="semibold" lineHeight="tight">
               {`(${movie.Year})`}
             </Heading>
 

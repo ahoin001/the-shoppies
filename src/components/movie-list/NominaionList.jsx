@@ -1,13 +1,20 @@
-import React from 'react';
-import { useRecoilValue } from 'recoil';
+import React, { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 import { nominationListState } from '../../atoms/atoms';
 import { Box, Heading, ListItem, UnorderedList } from '@chakra-ui/react';
 import MovieCard from '../movie/movie-card';
 
 const NominaionList = ({ isNominatedList }) => {
-  const nominations = useRecoilValue(nominationListState);
+  const [nominations, setNominationList] = useRecoilState(nominationListState);
 
-  console.log('=================', nominations);
+  useEffect(() => {
+    console.log('LOCALSTORAGE: ', JSON.parse(localStorage.getItem('savedNominations')));
+    if (localStorage.getItem('savedNominations')) {
+      setNominationList(JSON.parse(localStorage.getItem('savedNominations')));
+    }
+  }, []);
+
+  // console.log('=================', nominations);
   //  TODO COME BACK AND ADD LOADING SCREEN
   if (!nominations || nominations.length === 0) return <p>Nominate a Movie!</p>;
 
@@ -17,7 +24,7 @@ const NominaionList = ({ isNominatedList }) => {
       {nominations.map(movie => {
         return (
           <ListItem key={movie.imdbID}>
-            {/* FOr now use NominatedList prop to format Movie component for nomination list */}
+            {/* For now use NominatedList prop to format Movie component for nomination list */}
             <MovieCard removableNominee movie={movie} />
           </ListItem>
         );

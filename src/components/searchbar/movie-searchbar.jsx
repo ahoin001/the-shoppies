@@ -22,21 +22,21 @@ const MovieSearchBar = () => {
   const [searchState, setSearchState] = useState('');
 
   const handleInputChange = e => {
-    console.log('States BEFORE are ' + searchState + ' and ' + isLoading);
+    // console.log('States BEFORE are ' + searchState + ' and ' + isLoading);
     setSearchState(e.target.value);
     setIsLoading(true);
-    console.log('States AFTER are ' + searchState + ' and ' + isLoading);
+    // console.log('States AFTER are ' + searchState + ' and ' + isLoading);
   };
 
   const fetchMovies = async movieTitle => {
-    console.log('Called fetch loading is : ', isLoading);
+    // console.log('Called fetch loading is : ', isLoading);
     let apiUrl = `http://www.omdbapi.com/?s=${movieTitle}&type=movie&apikey=3efca87a`;
     if (isLoading) {
       try {
         await fetch(apiUrl)
           .then(res => res.json())
           .then(movies => {
-            console.log('FROM fetch: ', movies);
+            // console.log('FROM fetch: ', movies);
             setMovieList(movies.Search);
             setIsLoading(false);
           });
@@ -55,9 +55,9 @@ const MovieSearchBar = () => {
   }, [searchState, isLoading]);
 
   return (
-    <Box bg="white" my={7} px={7} py={6}>
+    <Box bg="white" my={7} px={7} py={6} >
       <Heading size="md">Movie Title</Heading>
-      <InputGroup mt={4}>
+      <InputGroup mt={4} w={"full"}>
         <InputLeftElement pointerEvents="none" children={<SearchIcon />} />
         <Input
           type="text"
