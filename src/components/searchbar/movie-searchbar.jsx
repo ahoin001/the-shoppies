@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
-import { movieListState, isLoadingState } from '../../atoms/atoms';
+import {
+  movieListState,
+  nominationListState,
+  isLoadingState,
+} from '../../atoms/atoms';
 
 import {
   Box,
@@ -9,6 +13,7 @@ import {
   Button,
   InputGroup,
   InputLeftElement,
+  Flex,
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 
@@ -18,6 +23,7 @@ import debounce from 'lodash.debounce';
 const MovieSearchBar = () => {
   const setMovieList = useSetRecoilState(movieListState);
   const [isLoading, setIsLoading] = useRecoilState(isLoadingState);
+  const setNominationList = useSetRecoilState(nominationListState);
 
   const [searchState, setSearchState] = useState('');
 
@@ -26,6 +32,11 @@ const MovieSearchBar = () => {
     setSearchState(e.target.value);
     setIsLoading(true);
     // console.log('States AFTER are ' + searchState + ' and ' + isLoading);
+  };
+
+  const clearNominations = () => {
+    localStorage.clear();
+    setNominationList([]);
   };
 
   const fetchMovies = async movieTitle => {
@@ -55,17 +66,22 @@ const MovieSearchBar = () => {
   }, [searchState, isLoading]);
 
   return (
-    <Box bg="white" my={7} px={7} py={6} >
+    <Box bg="white" my={7} px={7} py={6}>
       <Heading size="md">Movie Title</Heading>
-      <InputGroup mt={4} w={"full"}>
-        <InputLeftElement pointerEvents="none" children={<SearchIcon />} />
-        <Input
-          type="text"
-          placeholder="Search Movies"
-          value={searchState || ''}
-          onChange={handleInputChange}
-        />
-      </InputGroup>
+      <Flex direction="column">
+        <InputGroup mt={4} w={'full'}>
+          <InputLeftElement pointerEvents="none" children={<SearchIcon />} />
+          <Input
+            type="text"
+            placeholder="Search Movies"
+            value={searchState || ''}
+            onChange={handleInputChange}
+          />
+        </InputGroup>
+        <Button maxW="180px" mt={5} onClick={clearNominations}>
+          Clear Nominations
+        </Button>
+      </Flex>
     </Box>
   );
 };
