@@ -94,7 +94,7 @@ const MovieCard = ({
         <Image
           src={movie.Poster}
           w="full"
-          h="300px"
+          h="230px"
           alt={`Picture of ${movie.name}`}
           roundedTop="lg"
         />
@@ -120,10 +120,24 @@ const MovieCard = ({
               {`(${movie.Year})`}
             </Heading>
 
-            {isNominee ? <Button onClick={nominateMovie}>Nominate</Button> : ''}
-            {isNominatedAlready ? <Button isDisabled>Nominate</Button> : ''}
+            {isNominee ? (
+              <Button colorScheme="green" onClick={nominateMovie}>
+                Nominate
+              </Button>
+            ) : (
+              ''
+            )}
+            {isNominatedAlready ? (
+              <Button isDisabled colorScheme="green">
+                Nominate
+              </Button>
+            ) : (
+              ''
+            )}
             {removableNominee ? (
-              <Button onClick={removeNominatedMovie}>Remove</Button>
+              <Button colorScheme="red" onClick={removeNominatedMovie}>
+                Remove
+              </Button>
             ) : (
               ''
             )}

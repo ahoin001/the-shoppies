@@ -22,17 +22,34 @@ const List = props => {
   let nominations = useRecoilValue(nominationListState);
   const isLoading = useRecoilValue(isLoadingState);
 
-  console.log('========query=========', movieSearchTitle);
+  // console.log('========query=========', movieSearchTitle);
   // console.log('========nominations=========', nominations);
-  console.log('========movies=========', movies);
+  // console.log('========movies=========', movies);
+  // console.log('^^^^^^^^^^^^^^^^^ NOMINEE LENGTH: ', nominations.length);
 
   if (!movies || movies.length === 0)
     return <p>Type in eligible movie title!</p>;
   if (isLoading) return <Spinner />;
+  if (nominations.length > 4) {
+    return (
+      <UnorderedList styleType="none">
+        <Heading size="md">{`Results for: ${movieSearchTitle}`} </Heading>
+        {movies.map(movie => {
+          return (
+            <Box key={movie.imdbID} w="100%">
+              <ListItem>
+                <MovieCard isNominatedAlready movie={movie} />
+              </ListItem>
+            </Box>
+          );
+        })}
+      </UnorderedList>
+    );
+  }
 
   return (
     <UnorderedList styleType="none">
-      <Heading size="md">{`Results for: ${movieSearchTitle }`} </Heading>
+      <Heading size="md">{`Results for: ${movieSearchTitle}`} </Heading>
       {movies.map(movie => {
         return (
           <Box key={movie.imdbID} w="100%">
@@ -41,10 +58,8 @@ const List = props => {
               {nominations.some(movieToCheckForNomination => {
                 return movieToCheckForNomination.imdbID === movie.imdbID;
               }) ? (
-                // <Movie isNominatedAlready movie={movie} />
                 <MovieCard isNominatedAlready movie={movie} />
               ) : (
-                // <Movie isNominee movie={movie} />
                 <MovieCard isNominee movie={movie} />
               )}
             </ListItem>

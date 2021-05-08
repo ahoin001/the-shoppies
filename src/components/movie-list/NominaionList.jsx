@@ -16,7 +16,7 @@ const NominaionList = ({ isNominatedList }) => {
 
   // console.log('=================', nominations);
   //  TODO COME BACK AND ADD LOADING SCREEN
-  if (!nominations || nominations.length === 0) return <p>Nominate a Movie!</p>;
+  if (!nominations || nominations.length === 0) return <Heading size="md">Nominate a Movie!</Heading>;
 
   return (
     <UnorderedList styleType="none">

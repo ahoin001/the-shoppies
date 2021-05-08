@@ -7,23 +7,36 @@ import {
   Heading,
   theme,
   Flex,
-  Center,
+  CSSReset,
 } from '@chakra-ui/react';
 
-import MovieCard from './components/movie/movie-card';
 // import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 import MovieSearchBar from './components/searchbar/movie-searchbar';
 import List from './components/movie-list/List';
 import NominaionList from './components/movie-list/NominaionList';
 
+const config = theme => ({
+  light: {
+    color: theme.colors.gray[700],
+    bg: theme.colors.red[500],
+    borderColor: theme.colors.gray[200],
+    placeholderColor: theme.colors.gray[500],
+  },
+  dark: {
+    color: theme.colors.whiteAlpha[900],
+    bg: theme.colors.gray[800],
+    borderColor: theme.colors.whiteAlpha[300],
+    placeholderColor: theme.colors.whiteAlpha[400],
+  },
+});
+
 function App() {
   return (
-    <ChakraProvider
-    //  theme={theme}
-    >
+    <ChakraProvider theme={theme}>
+      <CSSReset config={config} />
       <RecoilRoot>
-        <Box minH="8xl" bg="#f3f6f8">
+        <Box minH="full" bg="#f3f6f8">
           <Box py={90} px={180} maxW={1800} mx={'auto'}>
             <Heading>The Shoppies</Heading>
 
