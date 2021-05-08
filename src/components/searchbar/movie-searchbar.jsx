@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import {
   movieListState,
+  movieSearchTitleState,
   nominationListState,
   isLoadingState,
 } from '../../atoms/atoms';
@@ -21,15 +22,18 @@ import { SearchIcon } from '@chakra-ui/icons';
 import debounce from 'lodash.debounce';
 
 const MovieSearchBar = () => {
-  const setMovieList = useSetRecoilState(movieListState);
+  const [searchMovieTitle, setSearchMovieTitle] = useRecoilState(
+    movieSearchTitleState
+  );
   const [isLoading, setIsLoading] = useRecoilState(isLoadingState);
+  const setMovieList = useSetRecoilState(movieListState);
   const setNominationList = useSetRecoilState(nominationListState);
 
-  const [searchState, setSearchState] = useState('');
+  // const [searchState, setSearchState] = useState('');
 
   const handleInputChange = e => {
     // console.log('States BEFORE are ' + searchState + ' and ' + isLoading);
-    setSearchState(e.target.value);
+    setSearchMovieTitle(e.target.value);
     setIsLoading(true);
     // console.log('States AFTER are ' + searchState + ' and ' + isLoading);
   };
@@ -60,10 +64,10 @@ const MovieSearchBar = () => {
   const debouncedFetch = useCallback(debounce(fetchMovies, 380), []);
 
   useEffect(() => {
-    if (searchState.length > 0) {
-      debouncedFetch(searchState.trim());
+    if (searchMovieTitle.length > 0) {
+      debouncedFetch(searchMovieTitle.trim());
     }
-  }, [searchState, isLoading]);
+  }, [searchMovieTitle, isLoading]);
 
   return (
     <Box bg="white" my={7} px={7} py={6}>
@@ -74,7 +78,7 @@ const MovieSearchBar = () => {
           <Input
             type="text"
             placeholder="Search Movies"
-            value={searchState || ''}
+            value={searchMovieTitle || ''}
             onChange={handleInputChange}
           />
         </InputGroup>

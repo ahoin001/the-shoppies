@@ -2,6 +2,7 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import {
   movieListState,
+  movieSearchTitleState,
   nominationListState,
   isLoadingState,
 } from '../../atoms/atoms';
@@ -17,11 +18,13 @@ import MovieCard from '../movie/movie-card';
 
 const List = props => {
   let movies = useRecoilValue(movieListState);
+  let movieSearchTitle = useRecoilValue(movieSearchTitleState);
   let nominations = useRecoilValue(nominationListState);
   const isLoading = useRecoilValue(isLoadingState);
 
+  console.log('========query=========', movieSearchTitle);
   // console.log('========nominations=========', nominations);
-  // console.log('========movies=========', movies);
+  console.log('========movies=========', movies);
 
   if (!movies || movies.length === 0)
     return <p>Type in eligible movie title!</p>;
@@ -29,7 +32,7 @@ const List = props => {
 
   return (
     <UnorderedList styleType="none">
-      <Heading size="md">Results for </Heading>
+      <Heading size="md">{`Results for: ${movieSearchTitle }`} </Heading>
       {movies.map(movie => {
         return (
           <Box key={movie.imdbID} w="100%">

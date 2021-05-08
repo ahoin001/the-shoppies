@@ -18,16 +18,13 @@ import List from './components/movie-list/List';
 import NominaionList from './components/movie-list/NominaionList';
 
 function App() {
-  const [appState, setAppState] = useState({
-    loading: false,
-    movies: null,
-  });
-
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider
+    //  theme={theme}
+    >
       <RecoilRoot>
-        <Box h="100%" bg="#f3f6f8">
-          <Box py={90} px={180} maxW={1800} mx={'auto'} bg="#f3f6f8">
+        <Box minH="8xl" bg="#f3f6f8">
+          <Box py={90} px={180} maxW={1800} mx={'auto'}>
             <Heading>The Shoppies</Heading>
 
             <MovieSearchBar />
