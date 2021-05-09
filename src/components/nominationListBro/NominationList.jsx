@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { CSSTransition } from 'react-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import { nominationListState } from '../../atoms/atoms';
 import { Heading, ListItem, UnorderedList } from '@chakra-ui/react';
 import MovieCard from '../movie/movie-card';
+
+import './list-animations.css';
 
 const NominationList = ({ isNominatedList }) => {
   const [nominations, setNominationList] = useRecoilState(nominationListState);
@@ -26,17 +28,24 @@ const NominationList = ({ isNominatedList }) => {
 
   return (
     <UnorderedList styleType="none">
-      <Heading size="md">Nominations</Heading>
-      {nominations.map(movie => {
-        return (
-          // <CSSTransition>
-            <ListItem key={movie.imdbID}>
-              {/* For now use NominatedList prop to format Movie component for nomination list */}
-              <MovieCard removableNominee movie={movie} />
-            </ListItem>
-          // </CSSTransition>
-        );
-      })}
+      <TransitionGroup >
+        <Heading size="md">Nominations</Heading>
+        {nominations.map(movie => {
+          return (
+            <CSSTransition
+              key={movie.imdbID}
+              timeout={400}
+              classNames="animate"
+            >
+              <ListItem
+              // key={movie.imdbID}
+              >
+                <MovieCard removableNominee movie={movie} />
+              </ListItem>
+            </CSSTransition>
+          );
+        })}
+      </TransitionGroup>
     </UnorderedList>
   );
 };

@@ -10,10 +10,9 @@ import {
   CSSReset,
 } from '@chakra-ui/react';
 
-import Thing from './components/thing/thing'
 import MovieSearchBar from './components/searchbar/movie-searchbar';
 import List from './components/movie-list/List';
-import NominaionList from './components/movie-list/NominationList';
+import NominaionList from './components/nominationListBro/NominationList';
 import Banner from './components/banner/banner';
 
 const config = theme => ({
@@ -38,7 +37,6 @@ function App() {
       <RecoilRoot>
         <Box minH="full" bg="#f3f6f8">
           <Banner />
-          <Thing/>
           <Box py={78} px={180} maxW={1800} mx={'auto'}>
             <Heading>The Shoppies</Heading>
 
