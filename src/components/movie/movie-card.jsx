@@ -66,6 +66,7 @@ const MovieCard = ({
     // ? Update array in local and state with updated copy
     localStorage.setItem('savedNominations', JSON.stringify(copyOfArrayState));
     setNominationList(copyOfArrayState);
+
     return toast({
       position: 'top',
       duration: 2000,

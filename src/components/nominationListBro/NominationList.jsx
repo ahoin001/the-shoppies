@@ -3,12 +3,12 @@ import { useRecoilState } from 'recoil';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import { nominationListState } from '../../atoms/atoms';
-import { Heading, ListItem, UnorderedList } from '@chakra-ui/react';
+import { Box, Heading, ListItem, UnorderedList } from '@chakra-ui/react';
 import MovieCard from '../movie/movie-card';
 
 import './list-animations.css';
 
-const NominationList = ({ isNominatedList }) => {
+const NominationList = () => {
   const [nominations, setNominationList] = useRecoilState(nominationListState);
 
   useEffect(() => {
@@ -17,15 +17,12 @@ const NominationList = ({ isNominatedList }) => {
     }
   }, []);
 
-  if (!nominations || nominations.length === 0)
-    return <Heading size="md">Nominate a Movie!</Heading>;
-
   return (
-    <UnorderedList styleType="none">
+    <Box>
       <Heading size="md">Nominations</Heading>
-      <TransitionGroup>
-        {nominations.map(movie => {
-          return (
+      <UnorderedList styleType="none">
+        <TransitionGroup>
+          {nominations.map(movie => (
             <CSSTransition
               key={movie.imdbID}
               timeout={400}
@@ -35,10 +32,10 @@ const NominationList = ({ isNominatedList }) => {
                 <MovieCard removableNominee movie={movie} />
               </ListItem>
             </CSSTransition>
-          );
-        })}
-      </TransitionGroup>
-    </UnorderedList>
+          ))}
+        </TransitionGroup>
+      </UnorderedList>
+    </Box>
   );
 };
 export default NominationList;
