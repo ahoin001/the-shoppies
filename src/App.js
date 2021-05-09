@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { RecoilRoot } from 'recoil';
-import { useRecoilValue } from 'recoil';
 
 import {
   ChakraProvider,
@@ -11,6 +10,7 @@ import {
   CSSReset,
 } from '@chakra-ui/react';
 
+import Thing from './components/thing/thing'
 import MovieSearchBar from './components/searchbar/movie-searchbar';
 import List from './components/movie-list/List';
 import NominaionList from './components/movie-list/NominationList';
@@ -38,7 +38,8 @@ function App() {
       <RecoilRoot>
         <Box minH="full" bg="#f3f6f8">
           <Banner />
-          <Box py={90} px={180} maxW={1800} mx={'auto'}>
+          <Thing/>
+          <Box py={78} px={180} maxW={1800} mx={'auto'}>
             <Heading>The Shoppies</Heading>
 
             <MovieSearchBar />
