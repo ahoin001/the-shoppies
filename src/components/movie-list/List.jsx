@@ -28,7 +28,7 @@ const List = props => {
   // console.log('^^^^^^^^^^^^^^^^^ NOMINEE LENGTH: ', nominations.length);
 
   if (!movies || movies.length === 0)
-    return <p>Type in eligible movie title!</p>;
+    return <Heading size="md">Type in eligible movie title!</Heading>;
   if (isLoading) return <Spinner />;
   if (nominations.length > 4) {
     return (

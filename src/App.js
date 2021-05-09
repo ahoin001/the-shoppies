@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { RecoilRoot } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import {
   ChakraProvider,
@@ -10,11 +11,10 @@ import {
   CSSReset,
 } from '@chakra-ui/react';
 
-// import { ColorModeSwitcher } from './ColorModeSwitcher';
-
 import MovieSearchBar from './components/searchbar/movie-searchbar';
 import List from './components/movie-list/List';
-import NominaionList from './components/movie-list/NominaionList';
+import NominaionList from './components/movie-list/NominationList';
+import Banner from './components/banner/banner';
 
 const config = theme => ({
   light: {
@@ -37,6 +37,7 @@ function App() {
       <CSSReset config={config} />
       <RecoilRoot>
         <Box minH="full" bg="#f3f6f8">
+          <Banner />
           <Box py={90} px={180} maxW={1800} mx={'auto'}>
             <Heading>The Shoppies</Heading>
 
