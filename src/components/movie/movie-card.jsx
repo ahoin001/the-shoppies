@@ -24,28 +24,31 @@ const MovieCard = ({
       Poster: movie.Poster,
     };
 
-    // Display banner once user has 5 nominations
-    if (nominationList.length > 4) {
-      return toast({
-        position: 'top',
-        duration: 2900,
-        isClosable: true,
-
-        render: () => (
-          <Box color="white" p={5} bg="yellow.400" borderRadius="lg">
-            You can only nominate 5 movies, remove a movie from nominations list
-            to add a different movie
-          </Box>
-        ),
-      });
-    }
-
     // ? Must update array in state by copying and updating previous array not with .push
     setNominationList(oldList => [...oldList, nominatedTheMovie]);
     localStorage.setItem(
       'savedNominations',
       JSON.stringify([...nominationList, nominatedTheMovie])
     );
+
+    // toast for user feedback on add
+    return toast({
+      position: 'top',
+      duration: 2000,
+      isClosable: true,
+
+      render: () => (
+        <Box
+          color="white"
+          p={5}
+          bg="green.400"
+          borderRadius="lg"
+          textAlign="center"
+        >
+          <Heading size="md">Movie nominated!</Heading>
+        </Box>
+      ),
+    });
   };
 
   const removeNominatedMovie = () => {
@@ -63,6 +66,17 @@ const MovieCard = ({
     // ? Update array in local and state with updated copy
     localStorage.setItem('savedNominations', JSON.stringify(copyOfArrayState));
     setNominationList(copyOfArrayState);
+    return toast({
+      position: 'top',
+      duration: 2000,
+      isClosable: true,
+
+      render: () => (
+        <Box color="white" p={5} bg="red.400" borderRadius="lg">
+          <Heading size="md"> Movie was removed from nominees</Heading>
+        </Box>
+      ),
+    });
   };
 
   return (
