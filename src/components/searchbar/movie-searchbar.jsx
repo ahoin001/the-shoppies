@@ -45,7 +45,7 @@ const MovieSearchBar = () => {
 
   const fetchMovies = async movieTitle => {
     // console.log('Called fetch loading is : ', isLoading);
-    let apiUrl = `http://www.omdbapi.com/?s=${movieTitle}&type=movie&apikey=3efca87a`;
+    let apiUrl = `https://www.omdbapi.com/?s=${movieTitle}&type=movie&apikey=3efca87a`;
     if (isLoading) {
       try {
         await fetch(apiUrl)
