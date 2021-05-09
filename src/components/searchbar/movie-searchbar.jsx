@@ -70,7 +70,7 @@ const MovieSearchBar = () => {
   }, [searchMovieTitle, isLoading]);
 
   return (
-    <Box bg="white" my={7} px={7} py={6}>
+    <Box bg="white" my={7} px={7} py={6}  minW="500px">
       <Heading size="md">Movie Title</Heading>
       <Flex direction="column">
         <InputGroup mt={4} w={'full'}>

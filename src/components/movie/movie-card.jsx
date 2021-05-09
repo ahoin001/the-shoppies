@@ -81,25 +81,26 @@ const MovieCard = ({
   };
 
   return (
-    <Flex p={10} w="full" alignItems="center" justifyContent="center">
+    <Flex w="full" alignItems="center" justifyContent="center">
       <Box
-        minw="250px"
-        minH="200px"
-        maxW="300px"
+        // minw="250px"
+        // minH="200px"
+        maxW="280px"
         borderWidth="1px"
         rounded="lg"
-        shadow="lg"
+        shadow={{ base: 'md', xl: 'lg' }}
         position="relative"
+        backgroundColor="white"
       >
         <Image
           src={movie.Poster}
           w="full"
-          h="230px"
+          h={{ base: '190px', xl: '199px' }}
           alt={`Picture of ${movie.name}`}
           roundedTop="lg"
         />
 
-        <Box p="3" h="180px">
+        <Box minH="120px">
           <Flex
             mt="1"
             // maxW="400px"
@@ -108,14 +109,18 @@ const MovieCard = ({
             justifyContent="space-evenly"
             alignItems="center"
           >
-            <Heading
-              textAlign="center"
-              fontSize="xl"
-              fontWeight="semibold"
-              lineHeight="tight"
-            >
-              {movie.Title}
-            </Heading>
+            <Box overflow="hidden" maxW="230px">
+              <Heading
+                textAlign="center"
+                fontSize="xl"
+                fontWeight="semibold"
+                lineHeight="tight"
+                isTruncated
+              >
+                {movie.Title}
+              </Heading>
+            </Box>
+
             <Heading fontSize="xl" fontWeight="semibold" lineHeight="tight">
               {`(${movie.Year})`}
             </Heading>
