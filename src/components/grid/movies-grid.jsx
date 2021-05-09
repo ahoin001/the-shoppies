@@ -49,7 +49,7 @@ export default function MoviesGrid() {
   return (
     <Box bg="white" p={8}>
       <Heading size="lg"  pb={4}>{`Results for: "${movieSearchTitle}"`} </Heading>
-      <SimpleGrid minChildWidth="200px" spacing="20px" justifyItems="center">
+      <SimpleGrid minChildWidth="250px" spacing="20px" justifyItems="center">
         {movies.map(movie => {
           return (
             <Box key={movie.imdbID} w="100%">
