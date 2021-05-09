@@ -24,7 +24,7 @@ export default function MoviesGrid() {
   const isLoading = useRecoilValue(isLoadingState);
 
   if (!movies || movies.length === 0)
-    return <Heading size="md">Type movie titles in search bar and see them here!</Heading>;
+    return <Heading size="md" mt={8}>Type movie titles in search bar and see them here!</Heading>;
   if (isLoading) return <Center><Spinner size="xl"/></Center>;
 
   if (nominations.length > 4) {
