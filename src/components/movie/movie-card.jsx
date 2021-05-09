@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  Flex,
-  Box,
-  Image,
-  useToast,
-  Button,
-  useColorModeValue,
-  Heading,
-  Container,
-} from '@chakra-ui/react';
+import { Flex, Box, Image, useToast, Button, Heading } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import { nominationListState } from '../../atoms/atoms';
 
@@ -55,12 +46,9 @@ const MovieCard = ({
       'savedNominations',
       JSON.stringify([...nominationList, nominatedTheMovie])
     );
-
-    console.log('WOW OUR WINNERS!!', nominationList);
   };
 
   const removeNominatedMovie = () => {
-    // Find index of movie to remove
     const indexOfNominatedMovieToRemove = nominationList.findIndex(
       nominatedMovie => {
         return nominatedMovie.imdbID === movie.imdbID;
@@ -72,9 +60,7 @@ const MovieCard = ({
 
     copyOfArrayState.splice(indexOfNominatedMovieToRemove, 1);
 
-    // ? Update array in state with updated copy
-    // TODO
-    // ! Might just use filter on array since this is small project/list and no worry of being slow
+    // ? Update array in local and state with updated copy
     localStorage.setItem('savedNominations', JSON.stringify(copyOfArrayState));
     setNominationList(copyOfArrayState);
   };
@@ -82,7 +68,6 @@ const MovieCard = ({
   return (
     <Flex p={10} w="full" alignItems="center" justifyContent="center">
       <Box
-        // bg={useColorModeValue('white', 'gray.800')}
         minw="250px"
         minH="200px"
         maxW="300px"

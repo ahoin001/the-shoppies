@@ -22,11 +22,6 @@ const List = props => {
   let nominations = useRecoilValue(nominationListState);
   const isLoading = useRecoilValue(isLoadingState);
 
-  // console.log('========query=========', movieSearchTitle);
-  // console.log('========nominations=========', nominations);
-  // console.log('========movies=========', movies);
-  // console.log('^^^^^^^^^^^^^^^^^ NOMINEE LENGTH: ', nominations.length);
-
   if (!movies || movies.length === 0)
     return <Heading size="md">Type in eligible movie title!</Heading>;
   if (isLoading) return <Spinner />;
@@ -34,6 +29,7 @@ const List = props => {
     return (
       <UnorderedList styleType="none">
         <Heading size="md">{`Results for: ${movieSearchTitle}`} </Heading>
+
         {movies.map(movie => {
           return (
             <Box key={movie.imdbID} w="100%">
