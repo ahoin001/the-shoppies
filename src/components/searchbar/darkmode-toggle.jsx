@@ -3,20 +3,17 @@ import {
   useColorMode,
   useColorModeValue,
   Box,
-  Button,
-  Switch,
-  MoonIcon,
+  Button
 } from '@chakra-ui/react';
 
-export default function Mode() {
+export default function DarkmodeToggle() {
   const { toggleColorMode } = useColorMode();
 
-  const color = useColorModeValue('gray.800', 'white');
   const bg = useColorModeValue('white', 'hsl(219,25%,13%)');
 
   return (
     <>
-      <Button size="lg" onClick={toggleColorMode}>
+      <Button maxW="180px" onClick={toggleColorMode}>
         {bg === 'white' ? 'Dark Mode' : 'Light Mode'}
       </Button>
     </>

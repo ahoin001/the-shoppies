@@ -19,6 +19,8 @@ import {
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 
+import DarkModeToggle from './darkmode-toggle';
+
 // Might replace with custom debounce for practice but this works
 import debounce from 'lodash.debounce';
 
@@ -89,9 +91,13 @@ const MovieSearchBar = () => {
             onChange={handleInputChange}
           />
         </InputGroup>
-        <Button maxW="180px" mt={5} onClick={clearNominations}>
-          Clear Nominations
-        </Button>
+
+        <Flex mt={5} maxW={300} justifyContent="space-between">
+          <Button maxW="180px" onClick={clearNominations}>
+            Clear Nominations
+          </Button>
+          <DarkModeToggle />
+        </Flex>
       </Flex>
     </Box>
   );

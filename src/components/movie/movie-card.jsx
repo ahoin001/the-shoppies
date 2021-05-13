@@ -94,13 +94,14 @@ const MovieCard = ({
       <Box
         // minw="250px"
         // minH="200px"
-bg={cardBg}
+
         maxW="280px"
         borderWidth="1px"
         rounded="lg"
         shadow={{ base: 'md', xl: 'lg' }}
         position="relative"
-        backgroundColor="white"
+        // backgroundColor="white"
+        bg={cardBg}
       >
         <Image
           src={movie.Poster}
@@ -150,7 +151,7 @@ bg={cardBg}
               ''
             )}
             {removableNominee ? (
-              <Button colorScheme="red" onClick={removeNominatedMovie}>
+              <Button colorScheme="red" mt={2} onClick={removeNominatedMovie}>
                 Remove
               </Button>
             ) : (

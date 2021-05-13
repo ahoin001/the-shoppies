@@ -1,12 +1,7 @@
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 
-import {
-  ChakraProvider,
-  Box,
-  Heading,
-  Flex
-} from '@chakra-ui/react';
+import { ChakraProvider, Box, Heading, Flex } from '@chakra-ui/react';
 import theme from '../src/theme/theme';
 
 import NominationGrid from './components/grid/nominations-grid';
@@ -15,15 +10,14 @@ import MoviesGrid from './components/grid/movies-grid';
 import MovieSearchBar from './components/searchbar/movie-searchbar';
 import Banner from './components/banner/banner';
 
-import Mode from './mode.jsx';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
       <RecoilRoot>
-        <Box minH="full"  >
+        <Box minH="full">
           <Banner />
-          <Mode />
+
           <Box py={78} px="50px" maxW={2000} mx={'auto'}>
             <Heading>The Shoppies</Heading>
 
