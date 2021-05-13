@@ -9,7 +9,7 @@ import MoviesGrid from './components/grid/movies-grid';
 
 import MovieSearchBar from './components/searchbar/movie-searchbar';
 import Banner from './components/banner/banner';
-
+import {ColorModeSwitcher} from './ColorModeSwitcher'
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
       <RecoilRoot>
         <Box minH="full">
           <Banner />
-
+<ColorModeSwitcher/>
           <Box py={78} px="50px" maxW={2000} mx={'auto'}>
             <Heading>The Shoppies</Heading>
 
