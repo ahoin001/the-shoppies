@@ -24,7 +24,7 @@ export default function MoviesGrid() {
   let nominations = useRecoilValue(nominationListState);
   const isLoading = useRecoilValue(isLoadingState);
 
-  const bg = useColorModeValue('white', 'hsl(217,23%,22%)');
+  const bg = useColorModeValue('gray.200', 'hsl(217,23%,22%)');
 
   if (!movies || movies.length === 0)
     return <Heading size="md" mt={8}>Type movie titles in search bar and see them here!</Heading>;
