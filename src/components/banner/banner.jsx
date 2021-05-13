@@ -2,10 +2,12 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { nominationListState } from '../../atoms/atoms';
 
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, useColorModeValue } from '@chakra-ui/react';
 
 const Banner = () => {
   let nominationList = useRecoilValue(nominationListState);
+
+  // const bannerBg = useColorModeValue('blue.600', 'linear(to-r, cyan.700, purple.500)');
 
   return (
     <Box>
@@ -15,7 +17,7 @@ const Banner = () => {
           p={5}
           position="fixed"
           top="0"
-          bg="blue.600"
+          bgGradient="linear(to-r, cyan.700, purple.500) "
           color="white"
           zIndex={2}
         >
