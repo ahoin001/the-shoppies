@@ -14,6 +14,7 @@ import {
   Button,
   InputGroup,
   InputLeftElement,
+  useColorModeValue,
   Flex,
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
@@ -28,8 +29,6 @@ const MovieSearchBar = () => {
   const [isLoading, setIsLoading] = useRecoilState(isLoadingState);
   const setMovieList = useSetRecoilState(movieListState);
   const setNominationList = useSetRecoilState(nominationListState);
-
-  // const [searchState, setSearchState] = useState('');
 
   const handleInputChange = e => {
     // console.log('States BEFORE are ' + searchState + ' and ' + isLoading);
@@ -69,13 +68,21 @@ const MovieSearchBar = () => {
     }
   }, [searchMovieTitle, isLoading]);
 
+  const color = useColorModeValue('gray.800', 'white');
+  const containerBg = useColorModeValue('gray.200', 'gray.700');
+
+  const searchBg = useColorModeValue('white', 'hsl(217,23%,22%)');
+
   return (
-    <Box bg="white" my={7} px={7} py={6}  minW="500px">
-      <Heading size="md">Movie Title</Heading>
+    <Box bg={containerBg} my={7} px={7} py={6} minW="500px">
+      <Heading size="md" color={color}>
+        Movie Title
+      </Heading>
       <Flex direction="column">
         <InputGroup mt={4} w={'full'}>
           <InputLeftElement pointerEvents="none" children={<SearchIcon />} />
           <Input
+            bg={searchBg}
             type="text"
             placeholder="Search Movies"
             value={searchMovieTitle || ''}

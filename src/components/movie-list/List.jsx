@@ -27,7 +27,7 @@ const List = props => {
   if (isLoading) return <Spinner />;
   if (nominations.length > 4) {
     return (
-      <UnorderedList styleType="none">
+      <UnorderedList bg="blue" styleType="none">
         <Heading size="md">{`Results for: ${movieSearchTitle}`} </Heading>
 
         {movies.map(movie => {

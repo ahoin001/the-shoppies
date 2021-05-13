@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Box, Heading, SimpleGrid } from '@chakra-ui/react';
+import { Box, Heading, SimpleGrid,useColorModeValue } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 
 import { nominationListState } from '../../atoms/atoms';
@@ -16,10 +16,12 @@ export default function MovieGrid() {
     }
   }, []);
 
+  const containerBg = useColorModeValue('white', 'hsl(217,23%,22%)');
+
   if (nominations.length > 0) {
     return (
       <Box
-        bg="gray.300"
+        bg={containerBg}
         minh="800px"
         minW="500px"
         p={5}

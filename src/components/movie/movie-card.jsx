@@ -1,5 +1,13 @@
 import React from 'react';
-import { Flex, Box, Image, useToast, Button, Heading } from '@chakra-ui/react';
+import {
+  Flex,
+  Box,
+  Image,
+  useToast,
+  Button,
+  Heading,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import { nominationListState } from '../../atoms/atoms';
 
@@ -9,9 +17,8 @@ const MovieCard = ({
   isNominatedAlready,
   isNominee,
 }) => {
-  const [nominationList, setNominationList] = useRecoilState(
-    nominationListState
-  );
+  const [nominationList, setNominationList] =
+    useRecoilState(nominationListState);
 
   const toast = useToast();
 
@@ -80,11 +87,14 @@ const MovieCard = ({
     });
   };
 
+  const cardBg = useColorModeValue('white', 'hsl(219,25%,13%)');
+
   return (
-    <Flex w="full" alignItems="center" justifyContent="center">
+    <Flex w="full" alignItems="center" justifyContent="center" >
       <Box
         // minw="250px"
         // minH="200px"
+bg={cardBg}
         maxW="280px"
         borderWidth="1px"
         rounded="lg"
@@ -100,7 +110,7 @@ const MovieCard = ({
           roundedTop="lg"
         />
 
-        <Box minH="120px">
+        <Box minH="120px" >
           <Flex
             mt="1"
             // maxW="400px"

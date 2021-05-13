@@ -12,7 +12,8 @@ import {
   Heading,
   Spinner,
   SimpleGrid,
-  Center
+  Center,
+  useColorModeValue,
 } from '@chakra-ui/react';
 
 import MovieCard from '../movie/movie-card';
@@ -23,13 +24,15 @@ export default function MoviesGrid() {
   let nominations = useRecoilValue(nominationListState);
   const isLoading = useRecoilValue(isLoadingState);
 
+  const bg = useColorModeValue('white', 'hsl(217,23%,22%)');
+
   if (!movies || movies.length === 0)
     return <Heading size="md" mt={8}>Type movie titles in search bar and see them here!</Heading>;
   if (isLoading) return <Center><Spinner size="xl"/></Center>;
 
   if (nominations.length > 4) {
     return (
-      <Box bg="white" p={8}>
+      <Box bg={bg} p={8}>
         
         <Heading size="lg" pb={4}>{`Results for: "${movieSearchTitle}"`} </Heading>
 
@@ -47,7 +50,7 @@ export default function MoviesGrid() {
   }
 
   return (
-    <Box bg="white" p={8}>
+    <Box bg={bg} p={8}>
       <Heading size="lg"  pb={4}>{`Results for: "${movieSearchTitle}"`} </Heading>
       <SimpleGrid minChildWidth="250px" spacing="20px" justifyItems="center">
         {movies.map(movie => {
